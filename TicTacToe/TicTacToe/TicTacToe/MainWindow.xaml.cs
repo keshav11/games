@@ -31,13 +31,25 @@ namespace TicTacToe
         {
             MarkedUser0 = new LinkedList<int>();
             MarkedUser1 = new LinkedList<int>();
-            Turn = 0;            
+            Turn = 0;
             InitializeComponent();
+            SetTurnInformation();
+
         }
 
+        private void SetTurnInformation()
+        {
+            if (Turn == 0)
+                label.Content = "User 1's (X) Turn";
+            else
+                label.Content = "User 2's (O) Turn";
+        }
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            if(Turn == 0)
+            if (!button1.Content.Equals(""))
+                return;
+
+            if (Turn == 0)
             {
                 button1.Content = "X";
                 MarkedUser0.AddFirst(1);
@@ -48,14 +60,16 @@ namespace TicTacToe
                 MarkedUser1.AddFirst(1);
             }
 
-            MarkedUser0.AddFirst(1);
-            Turn  = ( Turn + 1 ) % 2;
+            Turn = (Turn + 1) % 2;
+            SetTurnInformation();
             CheckWin();
 
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
+            if (!button2.Content.Equals(""))
+                return;
             if (Turn == 0)
             {
                 button2.Content = "X";
@@ -70,13 +84,16 @@ namespace TicTacToe
             }
 
 
-            Turn  = ( Turn + 1 )% 2;
+            Turn = (Turn + 1) % 2;
+            SetTurnInformation();
             CheckWin();
 
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
+            if (!button3.Content.Equals(""))
+                return;
             if (Turn == 0)
             {
                 button3.Content = "X";
@@ -91,13 +108,16 @@ namespace TicTacToe
             }
 
 
-            Turn  = ( Turn + 1 )% 2;
+            Turn = (Turn + 1) % 2;
+            SetTurnInformation();
             CheckWin();
 
         }
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {
+            if (!button4.Content.Equals(""))
+                return;
             if (Turn == 0)
             {
                 button4.Content = "X";
@@ -112,13 +132,16 @@ namespace TicTacToe
             }
 
 
-            Turn  = ( Turn + 1 )% 2;
+            Turn = (Turn + 1) % 2;
+            SetTurnInformation();
             CheckWin();
 
         }
 
         private void button5_Click(object sender, RoutedEventArgs e)
         {
+            if (!button5.Content.Equals(""))
+                return;
             if (Turn == 0)
             {
                 button5.Content = "X";
@@ -133,13 +156,16 @@ namespace TicTacToe
             }
 
 
-            Turn  = ( Turn + 1 )% 2;
+            Turn = (Turn + 1) % 2;
+            SetTurnInformation();
             CheckWin();
 
         }
 
         private void button6_Click(object sender, RoutedEventArgs e)
         {
+            if (!button6.Content.Equals(""))
+                return;
             if (Turn == 0)
             {
                 button6.Content = "X";
@@ -154,13 +180,16 @@ namespace TicTacToe
             }
 
 
-            Turn  = ( Turn + 1 )% 2;
+            Turn = (Turn + 1) % 2;
+            SetTurnInformation();
             CheckWin();
 
         }
 
         private void button7_Click(object sender, RoutedEventArgs e)
         {
+            if (!button7.Content.Equals(""))
+                return;
             if (Turn == 0)
             {
                 button7.Content = "X";
@@ -175,13 +204,16 @@ namespace TicTacToe
             }
 
 
-            Turn  = ( Turn + 1 )% 2;
+            Turn = (Turn + 1) % 2;
+            SetTurnInformation();
             CheckWin();
 
         }
 
         private void button8_Click(object sender, RoutedEventArgs e)
         {
+            if (!button8.Content.Equals(""))
+                return;
             if (Turn == 0)
             {
                 button8.Content = "X";
@@ -196,13 +228,16 @@ namespace TicTacToe
             }
 
 
-            Turn  = ( Turn + 1 )% 2;
+            Turn = (Turn + 1) % 2;
+            SetTurnInformation();
             CheckWin();
 
         }
 
         private void button9_Click(object sender, RoutedEventArgs e)
         {
+            if (!button9.Content.Equals(""))
+                return;
             if (Turn == 0)
             {
                 button9.Content = "X";
@@ -216,7 +251,8 @@ namespace TicTacToe
             }
 
 
-            Turn  = ( Turn + 1 )% 2;
+            Turn = (Turn + 1) % 2;
+            SetTurnInformation();
             CheckWin();
         }
 
@@ -235,11 +271,12 @@ namespace TicTacToe
             button9.Content = "";
             Turn = 0;
             label.Content = "";
+            this.Title = "Tic Tac Toe";
         }
 
         private void CheckWin()
         {
-            if((MarkedUser0.Contains(1) && MarkedUser0.Contains(5) && MarkedUser0.Contains(9)) ||
+            if ((MarkedUser0.Contains(1) && MarkedUser0.Contains(5) && MarkedUser0.Contains(9)) ||
                (MarkedUser0.Contains(3) && MarkedUser0.Contains(5) && MarkedUser0.Contains(7)) ||
 
                (MarkedUser0.Contains(1) && MarkedUser0.Contains(2) && MarkedUser0.Contains(3)) ||
@@ -254,7 +291,7 @@ namespace TicTacToe
                 this.label.Content = "Winner is User 1 (X)";
             }
 
-            if ((MarkedUser1.Contains(1) && MarkedUser1.Contains(5) && MarkedUser1.Contains(9)) ||
+            else if ((MarkedUser1.Contains(1) && MarkedUser1.Contains(5) && MarkedUser1.Contains(9)) ||
                (MarkedUser1.Contains(3) && MarkedUser1.Contains(5) && MarkedUser1.Contains(7)) ||
 
                (MarkedUser1.Contains(1) && MarkedUser1.Contains(2) && MarkedUser1.Contains(3)) ||
@@ -268,6 +305,12 @@ namespace TicTacToe
                 this.Title = "Winner is User 2 (O)";
                 this.label.Content = "Winner is User 2 (O)";
             }
+
+            else if (MarkedUser1.Count + MarkedUser0.Count == 9)
+            {
+                this.Title = "Game Draw.";
+                this.label.Content = "Game Draw.";
+            }
         }
 
         private void button_reset_Click(object sender, RoutedEventArgs e)
@@ -278,5 +321,5 @@ namespace TicTacToe
 
 
 
-    
+
 }
